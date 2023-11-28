@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -eu
+
+thisdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+client="$thisdir"/../bin/client
+
+if [ ! -x  $client ]; then
+    echo "Error: no client binary found; run make to build $client." >&2
+    exit 1
+fi
+
+if [ $# -eq 0 ]; then
+    echo "usage ${0##/*} <test-plan.yaml>" >&2
+    exit 1
+fi
+
+domain=$(oc get -n openshift-ingress-operator ingresscontroller/default -o jsonpath='{.status.domain}')
+namespace=$(oc project -q)
+$client --domain "$domain" --namespace "$namespace" --test-plan "$1"

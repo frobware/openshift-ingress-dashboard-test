@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocpstrat139
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocpstrat139
+  template:
+    metadata:
+      labels:
+        app: ocpstrat139
+    spec:
+      containers:
+      - name: server
+        image: quay.io/amcdermo/openshift-ingress-operator-ocpstrat139
+        imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+          name: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            port: 8080
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 1
+          successThreshold: 1
+        livenessProbe:
+          failureThreshold: 1
+          httpGet:
+            port: 8080
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 1
+          successThreshold: 1

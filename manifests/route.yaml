@@ -1,0 +1,96 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-400
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-401
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-403
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-404
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-500
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-502
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-503
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ocpstrat139-504
+spec:
+  to:
+    kind: Service
+    name: ocpstrat139
+    weight: 100
+  port:
+    targetPort: http

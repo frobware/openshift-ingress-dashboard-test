@@ -1,0 +1,94 @@
+# Test Plan Configuration
+#
+# This configuration file defines a series of error plans for testing
+# HTTP error simulations. Each error plan is structured with the
+# following fields:
+#
+# - errorCode: The specific HTTP status code to simulate (e.g., 404,
+#   500). This field is mandatory and determines the type of error
+#   response to simulate.
+#
+# - errorRate: The percentage of requests that should result in the
+#   specified error. Represented as an integer, it defines how
+#   frequently the error should occur among the requests.
+#
+# - mode: Specifies the mode of operation for sending requests. Valid
+#   values are:
+#   - "indefinite": Continuously sends requests without a predefined limit.
+#   - "fixed": Sends a fixed number of requests as specified by the 'requests' field.
+#   - "duration": Sends requests for a specified duration of time.
+#
+# - duration: Defines the length of time to run the test. This field
+#   is used when the mode is set to "duration". The duration should be
+#   specified as a string in a format recognized by Go's
+#   time.ParseDuration (e.g., "5m", "2h").
+#
+# - requests: Specifies the total number of requests to send. This
+#   field is used when the mode is set to "fixed".
+#
+# - requestRatePerSecond: Defines the rate at which requests are sent,
+#   in terms of requests per second. This allows control over the load
+#   and pace of the requests being sent.
+#
+# - responseDataSize: Specifies the size of the response data for
+#   successful requests. The size is represented as a string, such as
+#   "50KB" or "100MB". This field determines the volume of data
+#   returned in successful responses, allowing for testing of
+#   response handling under various data sizes.
+#
+# Each plan defines a simulation for a specific HTTP error code.
+
+errorPlans:
+  - errorCode: 400           # Bad Request
+    errorRate: 15
+    mode: "duration"
+    duration: "15m"
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 401           # Unauthorized
+    errorRate: 25
+    mode: "fixed"
+    requests: 150
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 403           # Forbidden
+    errorRate: 35
+    mode: "indefinite"
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 404           # Not Found
+    errorRate: 45
+    mode: "duration"
+    duration: "5m"
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 500           # Internal Server Error
+    errorRate: 55
+    mode: "indefinite"
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 502           # Bad Gateway
+    errorRate: 65
+    mode: "fixed"
+    requests: 1000
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 503           # Service Unavailable
+    errorRate: 75
+    mode: "duration"
+    duration: "10m"
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
+
+  - errorCode: 504           # Gateway Timeout
+    errorRate: 85
+    mode: "fixed"
+    requests: 1000
+    requestRatePerSecond: 60
+    responseDataSize: "1MB"
