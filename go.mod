@@ -1,4 +1,4 @@
-module github.com/frobware/g/ocpstrat139
+module github.com/frobware/openshift-ingress-dashboard-test
 
 go 1.21
 
